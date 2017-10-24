@@ -1,18 +1,33 @@
-from flask import Flask
-from datetime import datetime
+from flask import Flask, jsonify
+
 app = Flask(__name__)
 
-@app.route('/')
-def homepage():
-    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
+route = [
+    {
+        'title': u'MADRID-LISBONNE-GRECE',
+        'price': u'250$'
+    }
+]
 
-    return """
-    <h1>Hello Sacha</h1>
-    <p>It is currently {time}.</p>
+details = [
+    {
+        'title': u'MADRID-LISBONNE',
+        'price': u'100$'
+    },
+    {
+        'title': u'LISBONNE-GRECE',
+        'price': u'100$'
+    },
+    {
+        'title': u'GRECE-MADRID',
+        'price': u'100$'
+    }
+]
 
-    <img src="http://loremflickr.com/600/400" />
-    """.format(time=the_time)
+@app.route('/todo/api/v1.0/planner', methods=['GET'])
+def get_tasks():
+    return jsonify({'route': route,"details":details})
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=True)
 
