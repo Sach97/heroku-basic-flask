@@ -24,8 +24,8 @@ details = [
     }
 ]
 
-@app.route('/todo/api/v1.0/planner', methods=['GET'])
-def get_tasks():
+@app.route('/planner', methods=['GET'])
+def get_planner():
     return jsonify({'route': route,"details":details})
 
 if __name__ == '__main__':
