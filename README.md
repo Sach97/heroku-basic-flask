@@ -329,7 +329,8 @@ And that's how you make your application available to the world.
 
 ~~~sh
 $ git checkout better_branch
-$ git merge --strategy=ours master    
+$ git merge --strategy=ours --no-commit master
+$ git commit
 $ git checkout master
 $ git merge better_branch      
 ~~~       
