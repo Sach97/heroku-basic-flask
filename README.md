@@ -1,6 +1,7 @@
 
+A simple Python Flask example application that's ready to run on Heroku.
 
-### tl;dr 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 A walkthrough on how to get set up with Heroku and its toolkit and then how to deploy a simple web application (for free) on the Heroku Cloud. 
 
