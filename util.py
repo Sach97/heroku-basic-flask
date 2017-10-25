@@ -15,3 +15,26 @@ class DateConverter(BaseConverter):
 
     def to_url(self, value):
         return value.strftime('%Y-%m-%d')
+
+
+class ListStringConverter(BaseConverter):
+
+    def to_python(self, value):
+        try:
+            return value.split('-')
+        except ValueError:
+            raise ValidationError()
+
+    def to_url(self, value):
+        pass
+
+class ListIntConverter(BaseConverter):
+
+    def to_python(self, value):
+        try:
+            return value.split('-')
+        except ValueError:
+            raise ValidationError()
+
+    def to_url(self, value):
+        pass
