@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask import request
 
 app = Flask(__name__)
 
@@ -27,6 +28,12 @@ details = [
 @app.route('/planner', methods=['GET'])
 def get_planner():
     return jsonify({'route': route,"details":details})
+
+
+@app.route('/login', methods=['GET'])
+def login():
+    ville = request.args.getlist('ville')
+    return jsonify({'ville': ville})
 
 if __name__ == '__main__':
     app.run(debug=True)
