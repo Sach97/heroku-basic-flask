@@ -324,6 +324,16 @@ My app happens to be given the name __warm-scrubland-16039__, which means that i
 
 And that's how you make your application available to the world.
 
+# Make the current Git Branch a master branch (good practice)
+ To avoid everyone to be messed up, with those git commands the new master have the old master as an ancestor, so when you push it
+
+~~~sh
+$ git checkout better_branch
+$ git merge --strategy=ours master    
+$ git checkout master
+$ git merge better_branch      
+~~~       
+
 ## Scaling the app with dynos
 
 Heroku [has this concept of __dynos__](https://devcenter.heroku.com/articles/dynos), an abstraction of the servers used to host your app and do its computational work. The free account lets you run apps on a single dyno...and by default, your new apps should have a single dyno upon creation. But just incase it doesn't, run this heroku command:
