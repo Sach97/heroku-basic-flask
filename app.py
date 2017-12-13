@@ -3,6 +3,7 @@ from flask import request
 from util import DateConverter
 from util import ListStringConverter
 from util import ListIntConverter
+from util import ListofRoutesConverter
 
 app = Flask(__name__)
 
@@ -10,6 +11,7 @@ app = Flask(__name__)
 app.url_map.converters['date'] = DateConverter
 app.url_map.converters['listofstrings'] = ListStringConverter
 app.url_map.converters['listofints'] = ListIntConverter
+app.url_map.converters['listofroutes'] = ListofRoutesConverter
 
 route = [
     {
@@ -54,6 +56,10 @@ def date(dates):
 @app.route('/airports/all', methods=['GET'])
 def get_all_airports():
     return jsonify(airports)
+
+@app.route('/routes/<listofroutes:routes>', methods=['GET'])
+def routes(routes):
+    return jsonify({'routes': routes})
 
 
 @app.route('/planner/startCity/<string:cityName>/startDate/<date:dates>/cities/<listofstrings:cities>/days/<listofints:days>', methods=['GET'])

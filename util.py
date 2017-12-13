@@ -38,3 +38,24 @@ class ListIntConverter(BaseConverter):
 
     def to_url(self, value):
         pass
+
+class ListofRoutesConverter(BaseConverter):
+
+    def to_python(self, value):
+        response = ''
+        try:
+
+            comma =  value.split(',')
+            ultElem = comma[-1]
+            for elem in comma:
+                code = elem.split('-')
+                if (elem!=ultElem):
+                    response = response + '('+'\''+str(code[0])+'\''+","+'\''+str(code[1])+'\''+')'+','
+                else:
+                    response = response + '('+'\''+str(code[0])+'\''+","+'\''+str(code[1])+'\''+')'
+            return '['+response+']'
+        except ValueError:
+            raise ValidationError()
+
+    def to_url(self, value):
+        pass
