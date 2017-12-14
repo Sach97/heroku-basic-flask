@@ -39,21 +39,25 @@ class ListIntConverter(BaseConverter):
     def to_url(self, value):
         pass
 
+
 class ListofRoutesConverter(BaseConverter):
 
     def to_python(self, value):
-        response = ''
+        response = []
+        
         try:
 
             comma =  value.split(',')
             ultElem = comma[-1]
             for elem in comma:
+                code_elem = []
                 code = elem.split('-')
-                if (elem!=ultElem):
-                    response = response + '('+'\''+str(code[0])+'\''+","+'\''+str(code[1])+'\''+')'+','
-                else:
-                    response = response + '('+'\''+str(code[0])+'\''+","+'\''+str(code[1])+'\''+')'
-            return '['+response+']'
+                code_elem.append(str(code[0]))
+                code_elem.append(str(code[1]))
+                response.append(code_elem)
+
+               
+            return response
         except ValueError:
             raise ValidationError()
 

@@ -4,6 +4,8 @@ from util import DateConverter
 from util import ListStringConverter
 from util import ListIntConverter
 from util import ListofRoutesConverter
+from refactoring import finalResult
+import datetime
 
 app = Flask(__name__)
 
@@ -62,15 +64,14 @@ def routes(routes):
     return jsonify({'routes': routes})
 
 
-@app.route('/planner/startCity/<string:cityName>/startDate/<date:dates>/cities/<listofstrings:cities>/days/<listofints:days>', methods=['GET'])
-def getStart(dates,cityName,cities,days):
-	city = request.args.get('name')
-	date = dates
-	date = str(date)
-	#http://localhost:5000/planner/startCity/MADRID/startDate/2017-02-03/cities/GRECE-LISBONNE/days/2-3
-	return jsonify({'startDate': date,'startCity':cityName,'cities':cities,'days':days})
-
-
+@app.route('/planner/startDate/<date:dates>/cities/<listofstrings:cities>/days/<listofints:days>/routes/<listofroutes:routes>', methods=['GET'])
+def getStart(dates,cities,days,routes):
+    #city = request.args.get('name')
+    date_final = dates
+    routes_final = routes
+    #http://localhost:5000/planner/startDate/2017-02-03/cities/MADRID-GRECE-LISBONNE/days/2-3-5/routes/MADRID-GRECE,MADRID-LISBONNE,GRECE-LISBONNE,GRECE-MADRID,LISBONNE-GRECE,LISBONNE-MADRID
+    result = finalResult(routes_final,date_final,cities,days)
+    return result
 
 
 if __name__ == '__main__':
